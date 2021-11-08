@@ -1,27 +1,42 @@
 import React from 'react';
-import {StyleSheet, TextInput, View} from 'react-native';
+import { StyleSheet, TextInput, View} from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import colors from '../utils/colors';
 
 export default function Form(props) {
-  const {setCapital, setInterest, setMonths} = props;
+  const { setCapital, setInterest, setMonths, setName } = props;
 
   return (
     <View style={styles.viewForm}>
       <View style={styles.viewInputs}>
+        <TextInput
+          placeholder="Nombre"
+          style={styles.input}
+          onChange={(e) => setName(e.nativeEvent.text)}
+        />
         <TextInput
           placeholder="Cantidad a pedir"
           keyboardType="numeric"
           style={styles.input}
           onChange={(e) => setCapital(e.nativeEvent.text)}
         />
-        <TextInput
-          placeholder="Interes %"
-          keyboardType="numeric"
-          style={[styles.input, styles.inputPercentage]}
-          onChange={(e) => setInterest(e.nativeEvent.text)}
-        />
       </View>
+      <RNPickerSelect
+        style={picketSelectStyles}
+        onValueChange={(value) => setInterest(value)}
+        placeholder={{
+          label: 'Porcentaje de Interes',
+          value: null,
+        }}
+        items={[
+          { label: '0,5 %', value: 0.5 },
+          { label: '1 %', value: 1 },
+          { label: '1,5 %', value: 1.5 },
+          { label: '2 %', value: 2 },
+          { label: '2,5 %', value: 2.5 },
+          { label: '3 %', value: 3 },
+        ]}
+      />
       <RNPickerSelect
         style={picketSelectStyles}
         onValueChange={(value) => setMonths(value)}
@@ -30,10 +45,10 @@ export default function Form(props) {
           value: null,
         }}
         items={[
-          {label: '3 meses', value: 3},
-          {label: '6 meses', value: 6},
-          {label: '12 meses', value: 12},
-          {label: '24 meses', value: 24},
+          { label: '3 meses', value: 3 },
+          { label: '6 meses', value: 6 },
+          { label: '12 meses', value: 12 },
+          { label: '24 meses', value: 24 },
         ]}
       />
     </View>
@@ -47,9 +62,10 @@ const styles = StyleSheet.create({
     width: '85%',
     paddingHorizontal: 50,
     backgroundColor: colors.PRIMARY_COLOR_DARK,
-    borderRadius: 30,
+    borderRadius: 5,
     height: 180,
     justifyContent: 'center',
+    alignItems:'center'
   },
   viewInputs: {
     flexDirection: 'row',
@@ -91,6 +107,7 @@ const picketSelectStyles = StyleSheet.create({
     fontSize: 16,
     paddingHorizontal: 10,
     paddingVertical: 8,
+    marginTop:5,
     borderWidth: 0.5,
     borderColor: 'grey',
     borderRadius: 8,

@@ -2,13 +2,14 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
 export default function ResultCalculation(props) {
-  const {capital, interest, months, total, errorMessage} = props;
+  const {capital, interest, months, total, errorMessage, nombre} = props;
 
   return (
     <View style={styles.content}>
       {total && (
         <View style={styles.boxResult}>
           <Text style={styles.title}>RESUMEN</Text>
+          <DataResult title="Nombre:" value={nombre} />
           <DataResult title="Cantidad solicitada:" value={`${capital} €`} />
           <DataResult title="Interes %:" value={`${interest} %`} />
           <DataResult title="Plazos:" value={`${months} meses`} />

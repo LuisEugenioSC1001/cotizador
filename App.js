@@ -21,9 +21,10 @@ export default function App() {
   const [months, setMonths] = useState(null);
   const [total, setTotal] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
+  const [name, setName] = useState("");
 
   useEffect(() => {
-    if (capital && interest && months) calculate();
+    if (capital && interest && months && name ) calculate();
     else reset();
   }, [capital, interest, months]);
 
@@ -33,6 +34,8 @@ export default function App() {
       setErrorMessage('Añade la cantidad que quieres solicitar');
     } else if (!interest) {
       setErrorMessage('Añade el interes del prestamos');
+    } else if (!name) {
+      setErrorMessage('Ingrese el nombre del solicitante del prestamo');
     } else if (!months) {
       setErrorMessage('Seleccióna los meses a pagar');
     } else {
@@ -60,9 +63,11 @@ export default function App() {
           setCapital={setCapital}
           setInterest={setInterest}
           setMonths={setMonths}
+          setName = {setName}
         />
       </SafeAreaView>
       <ResultCalculation
+        nombre = {name}
         capital={capital}
         interest={interest}
         months={months}
